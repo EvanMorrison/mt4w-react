@@ -1,0 +1,14 @@
+# OS directories
+.DS_Store
+
+# Workspace config folders
+.vscode
+
+# Logs and local files to ignore
+*.log
+*.ignore
+
+node_modules
+dist
+images
+assets
