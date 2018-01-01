@@ -92,7 +92,15 @@ module.exports = (env = {}) => {
                                       })
                       else return ['style-loader', 'css-loader']
                   })()
-                }
+                },
+                { test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+                  use: [{
+                          loader: 'url-loader',
+                          options: {
+                            limit: 33000,
+                            name: 'assets/fonts/[name].[hash].[ext]'
+                          }
+                  }]}  
             ]
         },
 
