@@ -14,6 +14,7 @@ const HeroSection = styled.div`
   flex-direction: row;
   padding: 80px 0 100px;
   background: transparent;
+  justify-content: center;
   :after {
     content: '';
     position: absolute;
@@ -21,15 +22,20 @@ const HeroSection = styled.div`
     left: 0;
     height: calc(100% + 100px);
     width: 100%;
-    opacity: 1;
+    opacity: .5;
     z-index: -1;
     background-image: linear-gradient(to bottom, 
                             ${() => rgba('#9575CD',.5)} 67%, 
                             ${()=> rgba('#651FFF',.5)});
-    ${'' /* background-image: url(${hero}); */}
+    background-image: url(${hero});
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    filter: blur(8px);
+  }
+  @media screen and (max-width: 1099px) {
+    flex-direction: column;
+    align-items: center;
   }
 `
 class HeroComponent extends React.Component {
@@ -38,8 +44,6 @@ class HeroComponent extends React.Component {
   }
 
   panelClick = (event, i) => {
-    console.log('event ', event)
-    console.log('i ', i)
     this.props.history.push(this.state.panels[i].route);
   }
 
