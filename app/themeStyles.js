@@ -7,7 +7,7 @@ export const theme = {
   logoBlue: '#43c7ed',
   logoOrange: '#ff7d09',
   logoGreen: '#66c368',
-  blueLt: '200,200,250',
+  blueLt: 'rgb(200, 200, 250)',
   titleFont: 'Philosopher',
   headingFont: 'Montserrat',
   bodyFont: 'Roboto',
