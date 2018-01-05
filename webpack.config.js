@@ -14,8 +14,8 @@ module.exports = (env = {}) => {
         entry: (() => {
             if (isProduction) return {
                 index: './app/index.js',
+                material: 'material-ui',
                 vendor: [
-                        'material-ui',
                         'react',
                         'react-dom',
                         'react-router-dom',
@@ -59,6 +59,7 @@ module.exports = (env = {}) => {
         module: {
             rules: [
                 {test:/\.js$/, exclude: /node_modules/, use: ['babel-loader']},
+                { test: /\.html$/, exclude: /node_modules/, use: 'raw-loader' },
                 {test:/\.(jpe?g|png|gif)$/, use: [
                                                 { 
                                                     loader: "url-loader",
@@ -122,6 +123,9 @@ module.exports = (env = {}) => {
                 pluginList.push(
                     // plugins for production only
                     new CleanWebpackPlugin(['dist']),
+                    new webpack.DefinePlugin({
+                        'process.env.NODE_ENV': JSON.stringify('production'),
+                    }),
                     new webpack.HashedModuleIdsPlugin(),
                     new webpack.optimize.CommonsChunkPlugin({
                         name: 'vendor'
@@ -129,13 +133,13 @@ module.exports = (env = {}) => {
                     new webpack.optimize.CommonsChunkPlugin({
                         name: 'runtime'
                     }),
-                    new CompressionPlugin({  
-                        asset: "[path].gz[query]",
-                        algorithm: "gzip",
-                        threshold: 10240,
-                        test: /\.js$|\.css$|\.html$/,
-                        minRatio: 0.8
-                    })
+                    // new CompressionPlugin({  
+                    //     asset: "[path].gz[query]",
+                    //     algorithm: "gzip",
+                    //     threshold: 10240,
+                    //     test: /\.js$|\.css$|\.html$/,
+                    //     minRatio: 0.8
+                    // })
                 )
             } else {
                 pluginList.push(

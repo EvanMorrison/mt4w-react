@@ -4,15 +4,24 @@ import { rgba } from 'polished';
 import { Row, Column } from '../Shared';
 
 const Panel = styled.div`
-  flex: 0 0 30%;
-  min-height: 630px;
-  margin: auto;
+  margin: 20px;
   border-radius: 10px;
   overflow: hidden;
-  background: rgba(${props => props.theme.blueLt},.7);
+  background: ${props => rgba(props.theme.blueLt,.7)};
   box-shadow: 1px 1px 3px 1px rgba(0,0,0,.4);
   &:hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: 1099px) {
+    flex: 0 0 30%;
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 40px;
+  }
+  @media screen and (min-width: 1100px) {
+    flex: 0 0 30%;
+    max-width: 400px;
+    height: 680px;
   }
 `
 const PanelHeading = styled.h2`
@@ -30,6 +39,15 @@ const PanelHeading = styled.h2`
 const PanelImg = styled.img`
   max-height: 250px;
   min-width: 100%;
+  @media screen and (max-width: 1099px) {
+    max-height: 200px;
+    min-width: auto;
+    position: relative;
+    display: block;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
 `
 const PanelContent = Column.extend`
   padding: 20px 40px;
@@ -44,12 +62,11 @@ const PanelSubtitle = styled.h2`
 `
 const PanelText = styled.p`
   font-family: ${props => props.theme.bodyFont};
-  text-align: justify;
-  font-size: 1.3em;
+  ${'' /* text-align: justify; */}
+  font-size: 1.2em;
   font-weight: 300;
-  hyphens: auto;
   opacity: .87;
-  line-height: 1.35em;
+  line-height: 1.5em;
 `
 
 const PanelComponent = ({props, color, onClick}) => (

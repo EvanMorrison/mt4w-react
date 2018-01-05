@@ -5,7 +5,6 @@ import ContactComponent from './ContactComponent';
 import LocationComponent from './LocationComponent';
 
 
-
 class HomeContainer extends React.Component {
 
   render() {
