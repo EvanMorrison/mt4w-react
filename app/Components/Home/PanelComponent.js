@@ -33,7 +33,7 @@ const PanelHeading = styled.h2`
   text-align: center;
   color: ${props => props.color};
   text-shadow: 1px 1px #224;
-  background-image: linear-gradient(to bottom, ${props => rgba(props.theme.primary,.8)}, ${props => rgba(props.theme.primary,.8)} 10%,
+  background-image: linear-gradient(to bottom, ${props => rgba(props.theme.primary,.7)}, ${props => rgba(props.theme.primary,.7)} 10%,
                     ${props => rgba(props.theme.primary,.8)} 90%);
 `
 const PanelImg = styled.img`

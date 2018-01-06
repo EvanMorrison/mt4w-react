@@ -8,17 +8,19 @@ import NavMenu from './NavMenu';
 
 
 const CustomNavbar = Row.extend`
-  position: sticky;
+  position: fixed;
   top: 0px;
   padding: 0 24px;
   width: 100%;
   z-index: 10;
-  background-color: ${props => rgba(props.theme.blueLt, 1)} !important;
-  background-image: linear-gradient(to bottom, 
-                    ${props => rgba(props.theme.primary,.5)},
-                    ${props => rgba(props.theme.primary,.6)} 30%,
-                    ${props => rgba(props.theme.primary,.8)} 90%);
+  background-color: ${props => rgba(props.theme.primary, (props.position === 1 ? .7: 0))} !important;
+  ${'' /* background-image: linear-gradient(to bottom, 
+                    ${props => rgba(props.theme.primary,.2)},
+                    ${props => rgba(props.theme.primary,.4)} 30%,
+                    ${props => rgba(props.theme.primary,.6)} 90%); */}
+  box-shadow: 0 2px 4px ${props => rgba('#555',(props.position == 1 ? 1 : 0))};
   height: 100px !important;
+  transition: all .2s linear;
 `
 const NavbarContentContainer = Row.extend`
   flex: 1;
@@ -29,7 +31,8 @@ const NavbarContentContainer = Row.extend`
 `
 const BrandGroup = Row.extend`
   position: relative;
-  top: ${props => (props.position < .2) ? -90 : (90*props.position < 85) ? 90*props.position - 85 : 0}px;
+  top: 0px;
+  opacity: ${props => props.position == 1 ? 1 : 0};
 `
 const Logo = styled.img.attrs({
   src: require('../../assets/logo_sm.png')
@@ -70,7 +73,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-        <CustomNavbar>
+        <CustomNavbar position={this.props.position}>
           <NavbarContentContainer>
             <BrandGroup position={this.props.position}>
               <Logo alt="logo"/>
@@ -86,7 +89,7 @@ class Navbar extends React.Component {
             <ToolbarGroup>
             <Column>
                 <NavContact>Call: 310-283-9382</NavContact>
-                <NavMenu/>
+                <NavMenu position={this.props.position}/>
               </Column>
             </ToolbarGroup>
           </NavbarContentContainer>

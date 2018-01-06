@@ -12,9 +12,11 @@ const Brand = styled.div.attrs({
   logo: require ('../../assets/logo_sm.png')
 })`
   position: fixed;
-  transform-origin: -100px bottom;
-  transform: scale(${props => (1 - props.position > .7) ? 1 - props.position : .7});
-  opacity: ${props => (props.position > .7) ? 0: 1};
+  transform-origin: -100px top;
+  transform: scale(${props => (1 - props.position > .75) ? 1 - props.position : .75})
+             translateY(${props => -23*(props.position)}px)
+             translateX(${props => -10*(props.position)}px);
+  opacity: ${props => (props.position === 1) ? 0: 1};
   min-width: 7em;
   margin-left: 150px;
   z-index: -1;

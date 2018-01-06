@@ -12,17 +12,17 @@ const HeroSection = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  padding: 80px 0 100px;
+  padding: 80px 0 200px;
   background: transparent;
   justify-content: center;
   :after {
     content: '';
     position: absolute;
-    top: -100px;
+    top: 0;
     left: 0;
-    height: calc(100% + 100px);
+    height: 100%;
     width: 100%;
-    opacity: .5;
+    opacity: .3;
     z-index: -1;
     background-image: linear-gradient(to bottom, 
                             ${() => rgba('#9575CD',.5)} 67%, 
@@ -31,7 +31,7 @@ const HeroSection = styled.div`
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    filter: blur(8px);
+    border-radius: 100% 0 100% 0/ 100px 0 200px 0;
   }
   @media screen and (max-width: 1099px) {
     flex-direction: column;

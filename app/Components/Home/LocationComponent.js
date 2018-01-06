@@ -7,11 +7,13 @@ import Map from './Map';
 
 const LocationWrapper = Row.extend`
  min-height: 600px;
+ border-radius: 90% 0 0 0 /150px 0 0 0;
  background-image: linear-gradient(to bottom, 
                       ${() => rgba('#9575CD',.5)} 67%, 
                       ${()=> rgba('#651FFF',.5)});
 `
 const SectionHeading = styled.h1`
+  font-family: ${props => props.theme.headingFont};
   text-align: center;
   margin-bottom: 80px;
 `
@@ -21,7 +23,7 @@ class LocationComponent extends React.Component {
     return (
       <LocationWrapper>
         <Column>
-          <SectionHeading>Office Location</SectionHeading>
+          <SectionHeading>Where to Find Us</SectionHeading>
           <Map />
         </Column>
       </LocationWrapper>
