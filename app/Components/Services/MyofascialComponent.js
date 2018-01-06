@@ -5,7 +5,7 @@ const MyofascialComponent = () => {
 
 
     return (
-      <Section>
+      <React.Fragment>
         <SectionTitle>Myofascial Release</SectionTitle>
         <SectionBody>
           <Paragraph>
@@ -18,7 +18,7 @@ const MyofascialComponent = () => {
             The relief experienced from Myofascial Release can be incredible, with benefits including dramatically increased mobility, stability, and functional strength.
           </Paragraph>
         </SectionBody>
-      </Section>
+      </React.Fragment>
     )
   
 }

@@ -5,7 +5,7 @@ class MassageComponent extends React.Component {
 
   render() {
     return (
-      <Section>
+      <React.Fragment>
         <SectionTitle>Massage</SectionTitle>
         <SectionBody>
           <Paragraph>
@@ -18,7 +18,7 @@ class MassageComponent extends React.Component {
             Sometimes the real source of tightness or pain is not what it first appears, and your therapist is expert at evaluating the whole picture to identify the root sources and treat them directly.
           </Paragraph>
         </SectionBody>
-      </Section>
+      </React.Fragment>
       
     )
   }

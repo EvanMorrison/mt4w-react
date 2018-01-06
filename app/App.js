@@ -13,18 +13,13 @@ import ServicesContainer from './Components/Services';
 import AboutComponent from './Components/About';
 import AppointmentComponent from './Components/Appointments';
 import Footer from './Components/Footer';
-import appState from './data/appState';
 import './main.scss';
 
 
 class App extends React.Component {
   state = {
     position: 0,
-    servicesRoutes: [
-      appState.homePage.heroPanels[0].route,
-      appState.homePage.heroPanels[1].route,
-      appState.homePage.heroPanels[2].route,
-    ]
+
   }
 
   componentDidMount = () => {

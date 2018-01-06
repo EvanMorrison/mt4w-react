@@ -7,6 +7,9 @@ import MLDComponent from './MLDComponent';
 import MyofascialComponent from './MyofascialComponent';
 import ServicesComponent from './ServicesComponent';
 
+const ServicesSection = Section.extend.attrs({
+  topcolor: props => props.theme.logoBlue,
+})``
 const StyledList = styled.ul`
   list-style: none;
   margin-top: 40px;
@@ -27,7 +30,7 @@ class ServicesContainer extends React.Component {
 
   render() {
     return (
-      <Section>
+      <ServicesSection>
         <nav>
           <StyledList>
           <li><NavLink to="/services/massage">Massage | </NavLink></li>
@@ -39,7 +42,7 @@ class ServicesContainer extends React.Component {
         <Route path='/services/massage' component={MassageComponent} />
         <Route path='/services/lymphatic' component={MLDComponent} />
         <Route path='/services/myofascial' component={MyofascialComponent} />
-      </Section>
+      </ServicesSection>
     )
   }
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { rgba } from 'polished';
-import appState from '../../data/appState';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -29,11 +28,6 @@ const NavList = styled.ul`
 class NavMenu extends React.Component {
   state = {
     servicesOpen: false,
-    servicesRoutes: [
-        appState.homePage.heroPanels[0].route,
-        appState.homePage.heroPanels[1].route,
-        appState.homePage.heroPanels[2].route
-    ]
   }
   openServicesMenu = (event ) => {
     event.preventDefault();
@@ -71,13 +65,13 @@ class NavMenu extends React.Component {
             <NavLink to="/services">
               <MenuItem value={0} primaryText="Services"/>
             </NavLink>
-            <NavLink to={this.state.servicesRoutes[0]}>
+            <NavLink to="/services/massage">
               <MenuItem value={1} primaryText="Massage"/>
             </NavLink>
-            <NavLink to={this.state.servicesRoutes[1]}>
+            <NavLink to="/services/lymphatic">
               <MenuItem value={2} primaryText="Lymphatic Drainage"/>
             </NavLink>
-            <NavLink to={this.state.servicesRoutes[2]}>
+            <NavLink to="/services/myofascial">
               <MenuItem value={3} primaryText="Myofascial Release"/>
             </NavLink>
           </Menu>

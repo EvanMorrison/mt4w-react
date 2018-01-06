@@ -7,6 +7,8 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: row;
   height: 150px;
+  max-width: 1280px;
+  margin: 0 auto;
 `
 const Brand = styled.div.attrs({
   logo: require ('../../assets/logo_sm.png')

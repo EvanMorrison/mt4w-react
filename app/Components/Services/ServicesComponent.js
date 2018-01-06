@@ -23,7 +23,7 @@ class ServicesComponent extends React.Component {
 
   render() {
     return (
-      <Section>
+      <React.Fragment>
         <SectionTitle>Services</SectionTitle>
         <SectionBody>
         <Paragraph>
@@ -36,7 +36,7 @@ class ServicesComponent extends React.Component {
           Manual therapy, including massage, makes a wonderful gift. Gift certificates are available for purchase upon request.
         </Paragraph>
         </SectionBody>
-      </Section>
+      </React.Fragment>
     )
   }
 }

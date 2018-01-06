@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import { Section, SectionTitle, SectionBody, Paragraph } from '../Shared';
 import portrait from  '../../assets/trish.png';
 
+const AboutSection = Section.extend.attrs({
+  topcolor: props => props.theme.logoGreen
+})``
+
 const Portrait = styled.img`
   float: left;
   margin: 0 20px 0 0;
@@ -13,7 +17,7 @@ const AboutComponent = () => {
 
   
     return (
-      <Section>
+      <AboutSection>
         <SectionTitle>About</SectionTitle>
         <SectionBody>
         <Portrait src={portrait} alt="Trish Romano"/>
@@ -27,7 +31,7 @@ const AboutComponent = () => {
             Trish has collaborated and established referalls with some of the best doctors and other health care providers in Scottsdale and Phoenix. She has over 17 years experience and thousands of hours advanced training. Every client receives personalized care and consultation, taking into account medical history and current needs.
           </Paragraph>
         </SectionBody>
-      </Section>
+      </AboutSection>
     )
   
 }

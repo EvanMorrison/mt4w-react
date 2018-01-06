@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled, {css} from 'styled-components';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import { rgba } from 'polished';
 import { Row, Column } from '../Shared';
 import NavMenu from './NavMenu';
@@ -54,6 +53,8 @@ const NavSubtitle = styled.h4`
   font-family: ${props => props.theme.headingFont};
   color: ${() => rgba('white',.7)};
 `
+const NavbarGroup = Row.extend`
+`
 const NavContact = styled.p`
   color: ${() => rgba('white',.87)};
   font-size: 1.2em;
@@ -86,12 +87,12 @@ class Navbar extends React.Component {
                 </NavSubtitle>
               </Column>
             </BrandGroup>
-            <ToolbarGroup>
+            <NavbarGroup>
             <Column>
                 <NavContact>Call: 310-283-9382</NavContact>
                 <NavMenu position={this.props.position}/>
               </Column>
-            </ToolbarGroup>
+            </NavbarGroup>
           </NavbarContentContainer>
         </CustomNavbar>
     )

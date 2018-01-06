@@ -1,11 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Section, SectionTitle, SectionBody, Paragraph } from '../Shared';
+
+const AppointmentSection = Section.extend.attrs({
+  topcolor: props => props.theme.logoOrange
+})``
 
 class AppointmentComponent extends React.Component {
 
   render() {
     return (
-      <Section>
+      <AppointmentSection>
         <SectionTitle>Appointments</SectionTitle>
         <SectionBody>
         <Paragraph>
@@ -21,7 +26,7 @@ class AppointmentComponent extends React.Component {
           Email: <a href="mailto:trish@manualtherapy4wellness.com">trish@manualtherapy4wellness.com</a>
         </Paragraph>
         </SectionBody>
-      </Section>
+      </AppointmentSection>
     )
   }
 }
