@@ -11,8 +11,9 @@ const NavList = styled.ul`
   list-style: none;
   li {
     display: inline-block;
-    color: white;
+    color: ${props => props.position === 1 ? 'white' : 'black'};
     margin-right: 2px;
+    transition: all .2s linear;
     a {
       display: inline-block;
       padding: 8px 20px;
@@ -46,7 +47,7 @@ class NavMenu extends React.Component {
   render () {
     return (
       <nav className="navbar">
-        <NavList>
+        <NavList position={this.props.position}>
           <li onMouseEnter={this.closeServicesMenu}>
             <NavLink exact={true} to='/'>Home</NavLink>
           </li>
