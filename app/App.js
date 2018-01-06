@@ -9,10 +9,7 @@ import {theme} from './themeStyles';
 import HeadingComponent from './Components/SiteHeading/HeadingComponent';
 import Navbar from './Components/Navbar';
 import HomeContainer from './Components/Home';
-import ServicesComponent from './Components/Services';
-import MassageComponent from './Components/Services/MassageComponent';
-import MLDComponent from './Components/Services/MLDComponent';
-import MyofascialComponent from './Components/Services/MyofascialComponent';
+import ServicesContainer from './Components/Services';
 import AboutComponent from './Components/About';
 import AppointmentComponent from './Components/Appointments';
 import Footer from './Components/Footer';
@@ -53,12 +50,9 @@ class App extends React.Component {
               <HeadingComponent ref='banner' position={this.state.bannerPos} />
               <Navbar position={this.state.bannerPos} />
               <Route exact path="/" component={HomeContainer} />
-              <Route exact path="/services" component={ServicesComponent} />
+              <Route path="/services" component={ServicesContainer} />
               <Route path="/about" component={AboutComponent} />
               <Route path="/appointments" component={AppointmentComponent} />
-              <Route path={this.state.servicesRoutes[0]} component={MassageComponent} />
-              <Route path={this.state.servicesRoutes[1]} component={MLDComponent} />
-              <Route path={this.state.servicesRoutes[2]} component={MyofascialComponent} />
               <Footer />
             </div>
           </ThemeProvider>

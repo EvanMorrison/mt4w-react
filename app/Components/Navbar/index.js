@@ -13,11 +13,12 @@ const CustomNavbar = Row.extend`
   padding: 0 24px;
   width: 100%;
   z-index: 10;
-  background-color: ${props => rgba(props.theme.blueLt, 1)} !important;
-  background-image: linear-gradient(to bottom, 
-                    ${props => rgba(props.theme.primary,.5)},
-                    ${props => rgba(props.theme.primary,.6)} 30%,
-                    ${props => rgba(props.theme.primary,.8)} 90%);
+  background-color: ${props => rgba(props.theme.primary, (props.position > .8 ? .7: .8))} !important;
+  ${'' /* background-image: linear-gradient(to bottom, 
+                    ${props => rgba(props.theme.primary,.2)},
+                    ${props => rgba(props.theme.primary,.4)} 30%,
+                    ${props => rgba(props.theme.primary,.6)} 90%); */}
+  box-shadow: 0 2px 4px #555;
   height: 100px !important;
 `
 const NavbarContentContainer = Row.extend`
@@ -70,7 +71,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-        <CustomNavbar>
+        <CustomNavbar position={this.props.position}>
           <NavbarContentContainer>
             <BrandGroup position={this.props.position}>
               <Logo alt="logo"/>

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Row, Column } from '../Shared';
 
 const ContactSection = Row.extend`
+  position: relative;
+  background: white;
   min-height: 500px;
   font-family: ${props => props.theme.headingFont};
   >:first-child {
