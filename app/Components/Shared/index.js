@@ -22,9 +22,13 @@ export const Column = styled.div`
   align-content: center;
 `
 export const Section = Column.extend`
-  width: 90%;
-  max-width: 1100px;
+  width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
+  padding: 50px 10%;
+  border-radius: 100% 0 100% 0/ 100px 0 200px 0;
+  ${props => props.topcolor && `border-top: 8px solid ${props.topcolor}`};
+  ${props => props.bottomcolor && `border-bottom: 12px solid ${props.bottomcolor}`};
 `
 export const SectionTitle = styled.h1`
   font-family: ${props => props.theme.titleFont};

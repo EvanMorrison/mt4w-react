@@ -30,8 +30,12 @@ const HeroSection = styled.div`
     background-image: url(${hero});
     background-repeat: no-repeat;
     background-position: center center;
+    background-attachment: fixed;
     background-size: cover;
     border-radius: 100% 0 100% 0/ 100px 0 200px 0;
+    border-top: 12px solid ${props => props.theme.logoGreen};
+    border-bottom: 12px solid ${props => props.theme.logoBlue};
+    
   }
   @media screen and (max-width: 1099px) {
     flex-direction: column;

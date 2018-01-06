@@ -6,7 +6,7 @@ class MLDComponent extends React.Component {
 
   render() {
     return (
-      <Section>
+      <React.Fragment>
         <SectionTitle>Manual Lymphatic Drainage</SectionTitle>
         <SectionBody>
           <Paragraph>
@@ -16,7 +16,7 @@ class MLDComponent extends React.Component {
             Swelling in the legs, arms, or any area of the body from edema can be mild to very sever. But even mild swelling can cause discomfort, anxiety, and self-consciousness. Fortunately, it can be treated and the swelling reduced, restoring your natural symmetry and aiding your body in ridding itself of unneeded waste and toxins.
           </Paragraph>
         </SectionBody>
-      </Section>
+      </React.Fragment>
     )
   }
 }
