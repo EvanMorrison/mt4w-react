@@ -44,11 +44,12 @@ const HeroSection = styled.div`
 `
 class HeroComponent extends React.Component {
   state = {
-    panels: appState.homePage.heroPanels
+    panels: appState.homePage.heroPanels,
+    routes: ['/services/massage', '/services/lymphatic', 'services/myofascial']
   }
 
   panelClick = (event, i) => {
-    this.props.history.push(this.state.panels[i].route);
+    this.props.history.push(this.state.routes[i]);
   }
 
   render() {

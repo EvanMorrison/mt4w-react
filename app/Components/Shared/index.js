@@ -31,9 +31,27 @@ export const Section = Column.extend`
   ${props => props.bottomcolor && `border-bottom: 12px solid ${props.bottomcolor}`};
 `
 export const SectionTitle = styled.h1`
+  position: relative;
   font-family: ${props => props.theme.titleFont};
   font-size: 3em;
   margin: 1em 0 1em; 
+  ${'' /* ${props => props.image} */};
+  &:after {
+    content: '';
+    background-image: url(${props => props.image});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 50px;
+    display: inline-block;
+    width: 150px;
+    height: 100px;
+    box-shadow: ${props => props.image && '2px 2px 2px #555'};
+    border-radius: 2px 50%/ 20% 20px;
+  }
   `
 export const SectionBody = styled.div`
   margin-bottom: 100px; 

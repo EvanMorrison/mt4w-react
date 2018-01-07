@@ -1,12 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Section, SectionTitle, SectionBody, Paragraph } from '../Shared';
 
+const Image = styled.img.attrs({
+  src: props => props.image
+})`
+  display: inline-block;
+  ${'' /* float: right; */}
+  top: 0;
+  left: 30%;
+  width: 200px;
+  margin: 20px;
+`
 class MassageComponent extends React.Component {
 
   render() {
     return (
       <React.Fragment>
-        <SectionTitle>Massage</SectionTitle>
+        <SectionTitle image={this.props.info.image}>Massage</SectionTitle>
         <SectionBody>
           <Paragraph>
             The benefits of massage are well known and are significant. New science and research continues to suggest that incorporating massage therapy into your wellness regimen can be very beneficial. Many massage therapy modalities have been created to aid the body through specific techniques, such as: Swedish Massage, Deep Tissue Massage, and many others.

@@ -7,6 +7,8 @@ import MLDComponent from './MLDComponent';
 import MyofascialComponent from './MyofascialComponent';
 import ServicesComponent from './ServicesComponent';
 
+import appState from '../../data/appState';
+
 const ServicesSection = Section.extend.attrs({
   topcolor: props => props.theme.logoBlue,
 })``
@@ -27,8 +29,9 @@ const StyledList = styled.ul`
 `
 
 class ServicesContainer extends React.Component {
-
+  
   render() {
+    const props = appState.homePage.heroPanels;
     return (
       <ServicesSection>
         <nav>
@@ -39,9 +42,9 @@ class ServicesContainer extends React.Component {
           </StyledList>
         </nav>
         <Route exact path="/services" component={ServicesComponent} />
-        <Route path='/services/massage' component={MassageComponent} />
-        <Route path='/services/lymphatic' component={MLDComponent} />
-        <Route path='/services/myofascial' component={MyofascialComponent} />
+        <Route path='/services/massage' render={() => <MassageComponent info={props[0]} />} />
+        <Route path='/services/lymphatic' render={() => <MLDComponent info={props[1]} />} />
+        <Route path='/services/myofascial' render={() => <MyofascialComponent info={props[2]} />} />
       </ServicesSection>
     )
   }
