@@ -1,44 +1,80 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Row, Column } from '../Shared';
+import { Row, Column } from '../../AppStyles';
+import appdata from '../../data/appState';
 
 const ContactSection = Row.extend`
+  @media (max-width: 786px) {
+     flex-direction: column;
+     justify-content: flex-end;
+     align-content: flex-end;
+     align-items: flex-start;
+     padding-top: 80px;
+   }
+   @media (min-width: 768px) and (max-width: 1439px) {
+     width: 80%;
+  }
   position: relative;
   min-height: 500px;
+  width: 95%;
+  max-width: 1280px;
+  margin: 0 auto;
   font-family: ${props => props.theme.headingFont};
-  >:first-child {
-    img {
-      width: 150px;
-      height: 200px;
-      margin-right: 30px;
+  align-items: center;
+  
+  justify-content: flex-start;
+   * {
+     transition: all .3s ease-out;
+   }
+ 
+`
+
+const Portrait = styled.img`
+    @media (max-width: 500px) {
     }
-  }
-  >:last-child {
-    flex-basis: 200px;
-  }
+    display: block;
+    flex-basis: 150px;
+    width: 150px;
+    height: 200px;
+    margin-right: 30px;
+    border-radius: 5px;
+    
 `
 const Headline = styled.div`
+  @media (max-width: 500px) {
+    font-size: 1em;
+  }
+  @media (min-width: 501px) and (max-width: 768px) {
+    font-size: 1.125em;
+  }
   font-size: 1.25em;
   font-weight: 300;
+  
+  
 `
 const Name = styled.div`
+  @media (max-width: 500px) {
+    font-size: 1.9em;
+  }
+  @media (min-width: 501px) and (max-width: 768px) {
+    font-size: 2.5em;
+  }
   font-size: 3.2em;
   strong {
     font-weight: 700;
   }
+  
 `
 
 const ContactComponent = () =>  (
   <ContactSection>
-    <Column>
-      <Row>
-      <img src={require ('../../assets/trish.png')} alt=""/>
-        <div>
+        <Portrait src={appdata.trishPortrait} alt=""/>
+        <Column>
           <Headline>
             Founder & Principal Care Provider
           </Headline>
           <Name>
-            <strong>Trish Romano</strong> , CLT LMT
+            <strong>Trish Romano</strong>, CLT LMT
           </Name>
           <Headline>
             <table>
@@ -50,10 +86,7 @@ const ContactComponent = () =>  (
               </tbody>
             </table>
           </Headline>
-        </div>
-      </Row>
-    </Column>
-    <Column/>
+        </Column>
     
   </ContactSection>
 )

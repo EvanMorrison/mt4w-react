@@ -5,11 +5,14 @@ import styled from 'styled-components';
 
 // import MapComponent from './MapComponent';
 import withGoogleApi from './GoogleApiComponent';
-import './mapStyles.scss';
+import infoWindowContent from './infoWindow';
+import './mapStyles.css';
 
 const Map = styled.div`
   height: 400px;
-  width: 600px;
+  width: 95%;
+  max-width: 600px;
+  margin: 0 auto;
 `
 
 class MapContainer extends React.Component {
@@ -44,7 +47,7 @@ class MapContainer extends React.Component {
         map: map
       });
       const infoWindow = new google.maps.InfoWindow({
-        content: require('./infoWindow.html')
+        content: infoWindowContent
       })
       // info window starts open
       infoWindow.open(map, marker);

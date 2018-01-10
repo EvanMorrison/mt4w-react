@@ -4,9 +4,10 @@
  * simply returns its children.
  */
 
- import React from 'react';
- import ReactDOM from 'react-dom';
- import { AppContainer } from 'react-hot-loader';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import registerServiceWorker from './registerServiceWorker';
 
  import App from './App';
 
@@ -16,7 +17,7 @@
     <AppContainer>
       <Component />
     </AppContainer>, 
-    document.getElementById('app')
+    document.getElementById('root')
   )
  }
 
@@ -26,4 +27,6 @@
    module.hot.accept('./App.js', () => {
      render(require('./App').default);
    })
+ } else {
+   registerServiceWorker();
  }

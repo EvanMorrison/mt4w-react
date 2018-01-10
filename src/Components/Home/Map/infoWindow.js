@@ -1,4 +1,4 @@
-<div class="place-card place-card-large">
+export default `<div class="place-card place-card-large">
   <div class="place-desc-large">
     <div class="place-name">Manual Therapy For Wellness</div>
     <div class="address">9458 E Ironwood Square Dr #102, Scottsdale, AZ 85258</div>
@@ -26,4 +26,5 @@
       </a>
     </div>
   </div>
-</div>
+</div>`
+

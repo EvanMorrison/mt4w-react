@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Section, SectionTitle, SectionBody, Paragraph } from '../Shared';
+import { Section, SectionTitle, SectionBody, Paragraph } from '../../AppStyles';
 
 const AppointmentSection = Section.extend.attrs({
   topcolor: props => props.theme.logoOrange

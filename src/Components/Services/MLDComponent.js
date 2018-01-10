@@ -1,5 +1,5 @@
 import React from 'react';
-import { Section, SectionTitle, SectionBody, Paragraph } from '../Shared';
+import { SectionTitle, SectionBody, Paragraph } from '../../AppStyles';
 
 
 class MLDComponent extends React.Component {
@@ -7,7 +7,7 @@ class MLDComponent extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <SectionTitle>Manual Lymphatic Drainage</SectionTitle>
+        <SectionTitle image={this.props.info.image}>Manual Lymphatic Drainage</SectionTitle>
         <SectionBody>
           <Paragraph>
             Manual lymphatic drainage (MLD) is a type of massage based on evidence that encouraging the natural circulation and drainage of fluid through pathways in our tissues and blood vessels can relieve swelling from edema and improve health.

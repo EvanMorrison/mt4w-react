@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:900,700,500,400,300,100');
 @import url('https://fonts.googleapis.com/css?family=Philosopher|Montserrat:100,300,600');
-@import './icon.style.scss';
+
 * {
   padding: 0;
   margin: 0;
@@ -13,12 +13,15 @@ body {
   font-size: 15px;
 }
 
-nav, div {
-  a:not([href^="mailto"]) {
-    text-decoration: none;
-    color: inherit;
-  }
+nav {
+  text-decoration: none;
+  color: inherit;
 }
+div  a:not([href^="mailto"]) {
+  text-decoration: none;
+  color: inherit;
+}
+
 
 .active {
   border-bottom: 1px solid rgba(steelblue,.7);

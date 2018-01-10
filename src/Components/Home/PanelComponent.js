@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rgba } from 'polished';
-import { Row, Column } from '../Shared';
+import { Column } from '../../AppStyles';
 
 const Panel = styled.div`
   margin: 20px;
@@ -9,8 +9,11 @@ const Panel = styled.div`
   overflow: hidden;
   background: ${props => rgba(props.theme.blueLt,.7)};
   box-shadow: 1px 1px 3px 1px rgba(0,0,0,.4);
+  transition: all .4s ease-out;
   &:hover {
     cursor: pointer;
+    transform: scale(1.02);
+    box-shadow: 4px 4px 6px rgba(0,0,0,.4);
   }
   @media screen and (max-width: 1099px) {
     flex: 0 0 30%;
@@ -33,8 +36,8 @@ const PanelHeading = styled.h2`
   text-align: center;
   color: ${props => props.color};
   text-shadow: 1px 1px #224;
-  background-image: linear-gradient(to bottom, ${props => rgba(props.theme.primary,.7)}, ${props => rgba(props.theme.primary,.7)} 10%,
-                    ${props => rgba(props.theme.primary,.8)} 90%);
+  background-image: linear-gradient(to bottom, ${props => rgba(props.theme.primary,.4)}, ${props => rgba(props.theme.primary,.4)} 10%,
+                    ${props => rgba(props.theme.primary,.5)} 90%);
 `
 const PanelImg = styled.img`
   max-height: 250px;

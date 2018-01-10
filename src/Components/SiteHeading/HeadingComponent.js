@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Row, Column } from '../Shared';
+import { Column } from '../../AppStyles';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -13,6 +13,7 @@ const StyledWrapper = styled.div`
 const Brand = styled.div.attrs({
   logo: require ('../../assets/logo_sm.png')
 })`
+  
   position: fixed;
   transform-origin: -100px top;
   transform: scale(${props => (1 - props.position > .75) ? 1 - props.position : .75})
@@ -22,6 +23,7 @@ const Brand = styled.div.attrs({
   min-width: 7em;
   margin-left: 150px;
   z-index: -1;
+  transition: all .2s ease-out;
   &:after {
     position: absolute;
     content: '';
@@ -34,6 +36,14 @@ const Brand = styled.div.attrs({
     left: -115px;
     margin: auto 0;
   }
+  @media (max-width: 426px) {
+    margin-left: 80px;
+      font-size: 70%;
+    &:after {
+      width: 65px;
+      left: -65px;
+    }
+  }
 `
 const BrandName = styled.h1`
   font-family: ${props => props.theme.titleFont};
@@ -41,7 +51,7 @@ const BrandName = styled.h1`
 `
 const Tagline = styled.h3`
   font-family: ${props => props.theme.headingFont};
-  font-size: 16px;
+  font-size: 1.1em;
 `
 
 

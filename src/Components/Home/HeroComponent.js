@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import {rgba} from 'polished';
 import appState from '../../data/appState';
-import hero from '../../assets/images/misc/background-1998454_1920.jpg';
-import {theme} from '../../themeStyles';
+import hero from '../../assets/images/background-1998454_980.jpg';
+import {theme} from '../../AppStyles';
 
 import PanelComponent from './PanelComponent';
 
@@ -12,7 +12,7 @@ const HeroSection = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  padding: 80px 0 200px;
+  padding: 80px 0 180px;
   background: transparent;
   justify-content: center;
   :after {
@@ -37,18 +37,20 @@ const HeroSection = styled.div`
     border-bottom: 12px solid ${props => props.theme.logoBlue};
     
   }
-  @media screen and (max-width: 1099px) {
+  @media screen and (max-width: 1023px) {
     flex-direction: column;
     align-items: center;
+    width: 100vw;
   }
 `
 class HeroComponent extends React.Component {
   state = {
-    panels: appState.homePage.heroPanels
+    panels: appState.homePage.heroPanels,
+    routes: ['/services/massage', '/services/lymphatic', 'services/myofascial']
   }
 
   panelClick = (event, i) => {
-    this.props.history.push(this.state.panels[i].route);
+    this.props.history.push(this.state.routes[i]);
   }
 
   render() {

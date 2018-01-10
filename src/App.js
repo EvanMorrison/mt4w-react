@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { ThemeProvider } from 'styled-components';
-import {theme} from './themeStyles';
+import {theme} from './AppStyles';
 
 import HeadingComponent from './Components/SiteHeading/HeadingComponent';
 import Navbar from './Components/Navbar';
@@ -13,25 +11,26 @@ import ServicesContainer from './Components/Services';
 import AboutComponent from './Components/About';
 import AppointmentComponent from './Components/Appointments';
 import Footer from './Components/Footer';
-import './main.scss';
+import './main.css';
+import './icons.css';
 
 
 class App extends React.Component {
   state = {
-    position: 0,
-
+    // a value from 0 to 1 representing proportion of window scroll until
+    // the navbar styling changes
+    scrollPosition: 0, 
   }
 
   componentDidMount = () => {
-    let bannerRef = ReactDOM.findDOMNode(this.refs.banner);
-    let bannerHt = bannerRef.getBoundingClientRect().height;
+    let startTransition = 50; // amount of pixels to scroll before the navbar styling changes
     window.addEventListener('scroll', evt => {
       let position = window.scrollY;
-      if (position < bannerHt) {
-        this.setState({ bannerPos: position/bannerHt })
+      if (position < startTransition) {
+        this.setState({ scrollPosition: position/startTransition })
       }
-      else if (position >= bannerHt && this.state.bannerPos < 1) {
-        this.setState({ bannerPos: 1 })
+      else if (position >= startTransition && this.state.scrollPosition < 1) {
+        this.setState({ scrollPosition: 1 })
       }
     })
   }
@@ -42,12 +41,15 @@ class App extends React.Component {
         <MuiThemeProvider >
           <ThemeProvider theme={theme}>
             <div>
-              <HeadingComponent ref='banner' position={this.state.bannerPos} />
-              <Navbar position={this.state.bannerPos} />
-              <Route exact path="/" component={HomeContainer} />
-              <Route path="/services" component={ServicesContainer} />
-              <Route path="/about" component={AboutComponent} />
-              <Route path="/appointments" component={AppointmentComponent} />
+              <HeadingComponent position={this.state.scrollPosition} />
+              <Navbar position={this.state.scrollPosition} />
+              <Switch>
+                <Route exact path="/" component={HomeContainer} />
+                <Route path="/services" component={ServicesContainer} />
+                <Route path="/about" component={AboutComponent} />
+                <Route path="/appointments" component={AppointmentComponent} />
+                <Redirect to="/" component={HomeContainer} />
+              </Switch>
               <Footer />
             </div>
           </ThemeProvider>

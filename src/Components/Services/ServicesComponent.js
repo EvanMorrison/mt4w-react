@@ -1,23 +1,6 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import styled from 'styled-components';
-import { Row, Column, Section, SectionTitle, SectionBody, Paragraph } from '../Shared';
-import MassageComponent from './MassageComponent';
-import MLDComponent from './MLDComponent';
-import MyofascialComponent from './MyofascialComponent';
+import { SectionTitle, SectionBody, Paragraph } from '../../AppStyles';
 
-const StyledList = styled.ul`
-  list-style: none;
-  margin-top: 40px;
-  li {
-    display: inline-block;
-    margin-right: 5px;
-    font-size: 18px;
-    &:first-child {color: ${props => props.theme.logoGreen};}
-    &:nth-child(2) {color: ${props => props.theme.logoOrange};}
-    &:last-child {color: ${props => props.theme.logoBlue};}
-  }
-`
 
 class ServicesComponent extends React.Component {
 

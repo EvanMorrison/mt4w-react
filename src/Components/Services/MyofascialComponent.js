@@ -1,12 +1,12 @@
 import React from 'react';
-import { Section, SectionTitle, SectionBody, Paragraph } from '../Shared';
+import { SectionTitle, SectionBody, Paragraph } from '../../AppStyles';
 
-const MyofascialComponent = () => {
+const MyofascialComponent = ({info}) => {
 
 
     return (
       <React.Fragment>
-        <SectionTitle>Myofascial Release</SectionTitle>
+        <SectionTitle image={info.image}>Myofascial Release</SectionTitle>
         <SectionBody>
           <Paragraph>
             Myofascial Release is a safe and very effective hands-on technique that involves applying gentle sustained pressure into the connective tissue restrictions to eliminate pain and restore motion.
