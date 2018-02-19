@@ -1,6 +1,8 @@
 import React from 'react';
 import { Section, SectionTitle, SectionBody, Paragraph } from '../../AppStyles';
 
+import EmailForm from './EmailForm';
+
 const AppointmentSection = Section.extend.attrs({
   topcolor: props => props.theme.logoOrange
 })``
@@ -24,6 +26,13 @@ class AppointmentComponent extends React.Component {
         <Paragraph>
           Email: <a href="mailto:trish@manualtherapy4wellness.com">trish@manualtherapy4wellness.com</a>
         </Paragraph>
+        <Paragraph>
+          - or -
+        </Paragraph>
+        <Paragraph>
+            Use this form:
+        </Paragraph>
+          <EmailForm />
         </SectionBody>
       </AppointmentSection>
     )
