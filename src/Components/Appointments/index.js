@@ -8,6 +8,11 @@ const AppointmentSection = Section.extend.attrs({
 })``
 
 class AppointmentComponent extends React.Component {
+  state = { emailSent: false };
+
+  onEmailSent = () => {
+    this.setState({ emailSent: true });
+  }
 
   render() {
     return (
@@ -24,15 +29,25 @@ class AppointmentComponent extends React.Component {
           - or -
         </Paragraph>
         <Paragraph>
-          Email: <a href="mailto:trish@manualtherapy4wellness.com">trish@manualtherapy4wellness.com</a>
+          Email: <a href="mailto:trish@mt4w.com">trish@mt4w.com</a>
         </Paragraph>
         <Paragraph>
           - or -
         </Paragraph>
-        <Paragraph>
-            Use this form:
-        </Paragraph>
-          <EmailForm />
+            {(this.state.emailSent ? 
+              <Paragraph style={{color:'green',fontWeight:'500'}}>
+                Email sent successfully!<br/>
+                We will normally get back to you the same or next business day.
+              </Paragraph>
+            : 
+              <React.Fragment >
+                <Paragraph>
+                  Use this form:
+               </Paragraph>
+                <EmailForm emailSent={this.state.emailSent} handleEmailSent={this.onEmailSent} />       
+              </React.Fragment>
+              )}
+        
         </SectionBody>
       </AppointmentSection>
     )

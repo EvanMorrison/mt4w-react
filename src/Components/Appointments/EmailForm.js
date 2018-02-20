@@ -19,7 +19,6 @@ class EmailForm extends Component {
     let message = this.state.message;
     message[event.target.name] = event.target.value;
     this.setState({ message })
-    console.log(this.state.message);
   }
   onSubmit = event => {
     event.preventDefault();
@@ -34,43 +33,53 @@ class EmailForm extends Component {
     // xhr.withCredentials = true;
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = () => {
-        // console.log( xhr.status )
-        // console.log(xhr.responseText);
-        if (xhr.status === 200) (this.setState({ isEmailSent: true})) ;
+        console.log( xhr.status )
+        console.log(xhr.responseText);
+        if (xhr.status === 200) {
+          // (this.setState({ isEmailSent: true})) ;
+          this.props.handleEmailSent();
+        }
         return;
     };
     // url encode form data for sending as post data
     const encoded = Object.keys(this.state.message).map(k => {
         return encodeURIComponent(k) + '=' + encodeURIComponent(this.state.message[k])
     }).join('&')
-    console.log('encoded ', encoded)
     xhr.send(encoded);
   }
 
   render() {
-    return (
-      <div>
-        <Form onSubmit={this.onSubmit}>
-          <Column>
-            <TextField type="text" name="name" floatingLabelText="name"
-                        value={this.state.message.name}
-                        onChange={this.handleChange}/>
-            <TextField type="text" name="phone" floatingLabelText="phone"
-                        value={this.state.message.phone}
-                        onChange={this.handleChange}/>
-            <TextField type="text" name="email" floatingLabelText="email"
-                        value={this.state.message.email}
-                        onChange={this.handleChange}/>
-            <TextField name="message" floatingLabelText="message" multiLine={true} rows={1} 
-                        value={this.state.message.message}
-                        onChange={this.handleChange}/>
-            <Button type="submit">
-              Send
-            </Button>
-          </Column>
-        </Form>
-      </div>
-    );
+    if (!this.props.emailSent) {  
+      return (
+        <div>
+          <Form onSubmit={this.onSubmit}>
+            <Column>
+              <TextField type="text" name="name" floatingLabelText="name"
+                          value={this.state.message.name}
+                          onChange={this.handleChange}/>
+              <TextField type="text" name="phone" floatingLabelText="phone"
+                          value={this.state.message.phone}
+                          onChange={this.handleChange}/>
+              <TextField type="text" name="email" floatingLabelText="email"
+                          value={this.state.message.email}
+                          onChange={this.handleChange}/>
+              <TextField name="message" floatingLabelText="message" multiLine={true} rows={1} 
+                          value={this.state.message.message}
+                          onChange={this.handleChange}/>
+              <Button type="submit">
+                Send
+              </Button>
+            </Column>
+          </Form>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+
+        </div>
+      )
+    }
   }
 }
 
