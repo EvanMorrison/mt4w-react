@@ -7,11 +7,58 @@ const AppointmentSection = Section.extend.attrs({
   topcolor: props => props.theme.logoOrange
 })``
 
-class AppointmentComponent extends React.Component {
-  state = { emailSent: false };
+const Message = Paragraph.extend`
+  ${'' /* transition: all .3s ease-out; */}
+`
 
-  onEmailSent = () => {
-    this.setState({ emailSent: true });
+class AppointmentComponent extends React.Component {
+  state = { 
+    message: {
+                name: '',
+                phone: '',
+                email: '',
+                message: ''
+    },
+    emailStatus: 'not sent',
+    sending: false
+  };
+
+  handleFormInput = event => {
+    if (this.state.emailStatus !== 'not sent') this.setState({ emailStatus: 'not sent'})
+    let message = this.state.message;
+    message[event.target.name] = event.target.value;
+    this.setState({ message });
+  }
+
+  sendMail = event => {
+    event.preventDefault();
+    this.setState({ sending: true})
+
+    const url = "https://script.google.com/a/manualtherapy4wellness.com/macros/s/AKfycbx6ytReR6wTIlQwIelOVrSD6VAuysoncSv3haaJ8zXZsYOq-p0/exec"
+              
+    // using Google Apps Script sendEmail to send the form data as an email. 
+    // trying $resource did not work, resulting in a cross-origin error. So this is using
+    // the plain vanilla XHR
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    // xhr.withCredentials = true;
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = () => {
+        // console.log( xhr.status )
+        // console.log(xhr.responseText);
+        if (xhr.status === 200) {
+          this.setState({ emailStatus: 'success', sending: false});
+        }
+        else {
+          this.setState({ emailStatus: 'failed', sending: false});
+        }
+        return;
+    };
+    // url encode form data for sending as post data
+    const encoded = Object.keys(this.state.message).map(k => {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(this.state.message[k])
+    }).join('&')
+    xhr.send(encoded);
   }
 
   render() {
@@ -34,19 +81,24 @@ class AppointmentComponent extends React.Component {
         <Paragraph>
           - or -
         </Paragraph>
-            {(this.state.emailSent ? 
-              <Paragraph style={{color:'green',fontWeight:'500'}}>
-                Email sent successfully!<br/>
-                We will normally get back to you the same or next business day.
-              </Paragraph>
-            : 
-              <React.Fragment >
-                <Paragraph>
-                  Use this form:
-               </Paragraph>
-                <EmailForm emailSent={this.state.emailSent} handleEmailSent={this.onEmailSent} />       
-              </React.Fragment>
-              )}
+        {(this.state.emailStatus === 'success' ? 
+          <Message style={{fontWeight:'500'}}>
+            Message sent successfully!<br/>
+            A confirmation was sent to you at {this.state.message.email}. <br/>
+            We will respond to your message soon. Thank you.
+          </Message>
+        : 
+          <React.Fragment>
+            {(this.state.emailStatus === 'failed' ? 
+              <Message>
+                Uh oh, there was a problem sending the message. Please check your network connetion and try again.
+              </Message>
+              :
+              ''
+            )}
+            <EmailForm message={this.state.message} handleInput={this.handleFormInput} onSubmit={this.sendMail} sending={this.state.sending}/>       
+          </React.Fragment>
+          )}
         
         </SectionBody>
       </AppointmentSection>
