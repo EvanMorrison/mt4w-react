@@ -20,20 +20,7 @@ export default [
         label: 'Lymphatic Drainage',
         path: '/services/lymphatic',
         icon: 'keyboard_arrow_right',
-        children: [
-          {
-            label: 'Lymphadema',
-            path: '/services/lypmphatic/lymph',
-            icon: 'keyboard_arrow_down',
-            children: null,
-          },
-          {
-            label: 'Treatment',
-            path: '/services/lyphatic/treat',
-            icon: 'keyboard_arrow_down',
-            children: null,
-          }
-        ],
+        children: null,
       },
       {
         label: 'Myofascial Release',

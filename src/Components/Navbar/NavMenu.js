@@ -52,7 +52,7 @@ const Icon = styled.span`
 const NavItems = ({menuItems, ...props}) => {
   return menuItems.map(m => (
       <li key={m.label} 
-          onMouseEnter={(m.label === 'Services' ? props.openServicesMenu : props.closeServicesMenu)}
+          onMouseEnter={(m.children ? props.openPopoverMenu : props.closePopoverMenu)}
           onClick={props.handleClick}>
         <NavLink to={m.path} exact={(m.path === '/' ? true : false)}>
           <Icon className={`icon-${m.icon}`}/>
@@ -64,35 +64,35 @@ const NavItems = ({menuItems, ...props}) => {
             <ul style={{marginLeft:'24px'}}>
               <NavItems {...props} menuItems={m.children} />
             </ul> 
-            : <Submenu {...props}/>  
+            : <Submenu {...props} menuItem={m}/>  
           : '')
         }
       </li>
     ))
 }
 
-const Submenu = (props) => {
+const Submenu = ({menuItem, ...props}) => {
   return (
-    <Popover open={props.servicesOpen}
+    <Popover open={props.servicesOpen && props.anchorEl && props.anchorEl.children[0].textContent === menuItem.label}
                  anchorEl={props.anchorEl}
                  anchorOrigin={props.anchorOrigin}
                  targetOrigin={props.targetOrigin}
                  useLayerForClickAway={false}
-                 onRequestClose={props.closeServicesMenu}>
-          <Menu onMouseLeave={props.closeServicesMenu}
+                 onRequestClose={props.closePopoverMenu}>
+          <Menu onMouseLeave={props.closePopoverMenu}
                 desktop={true}
                 onClick={props.handleClick}>
-            <NavLink to="/services">
-              <MenuItem onClick={props.closeServicesMenu} 
+            <NavLink to={menuItem.path}>
+              <MenuItem onClick={props.closePopoverMenu} 
                         value={0}
-                        primaryText="Services"
-                        leftIcon={<Icon className="icon-accessibility"/>}/>
+                        primaryText={menuItem.label}
+                        leftIcon={<Icon className={`icon-${menuItem.icon}`}/>}/>
             </NavLink>
-            {NavEntries[1]['children'].map((m,i) => {
+            {menuItem['children'].map((m,i) => {
               return (
                 <NavLink key={i} to={m.path}>
                   <MenuItem 
-                    onClick={props.closeServicesMenu}
+                    onClick={props.closePopoverMenu}
                     value={i+1}
                     primaryText={m.label}
                     leftIcon={<i className={`icon-${m.icon}`} ></i>}
@@ -111,11 +111,11 @@ class NavMenu extends React.Component {
     servicesOpen: false,
     anchorEl: null
   }
-  openServicesMenu = event => {
+  openPopoverMenu = event => {
     event.preventDefault();
     this.setState({ servicesOpen: true, anchorEl: event.currentTarget});
   }
-  closeServicesMenu = event => {
+  closePopoverMenu = event => {
     if (this.props.isDrawerOpen) return;
     else this.setState({ servicesOpen:  false });
   }
@@ -137,8 +137,8 @@ class NavMenu extends React.Component {
           <NavItems {...this.props} 
                     {...this.state}
                     menuItems={NavEntries}
-                    openServicesMenu={this.openServicesMenu}
-                    closeServicesMenu={this.closeServicesMenu}  />
+                    openPopoverMenu={this.openPopoverMenu}
+                    closePopoverMenu={this.closePopoverMenu}  />
         </NavList>
       </nav>
     )
