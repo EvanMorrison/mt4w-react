@@ -33,7 +33,6 @@ const BrandGroup = Row.extend`
   transition: all .2s ease-out;
   @media (max-width: 426px) {
     font-size: .8em;
-
   }
   position: relative;
   top: 0px;

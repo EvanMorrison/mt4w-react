@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import {rgba} from 'polished';
 import appState from '../../data/appState';
 import hero from '../../assets/images/background-1998454_980.jpg';
 import {theme} from '../../AppStyles';
@@ -24,9 +23,6 @@ const HeroSection = styled.div`
     width: 100%;
     opacity: .3;
     z-index: -1;
-    background-image: linear-gradient(to bottom, 
-                            ${() => rgba('#9575CD',.5)} 67%, 
-                            ${()=> rgba('#651FFF',.5)});
     background-image: url(${hero});
     background-repeat: no-repeat;
     background-position: center center;
@@ -35,7 +31,6 @@ const HeroSection = styled.div`
     border-radius: 100% 0 100% 0/ 100px 0 200px 0;
     border-top: 12px solid ${props => props.theme.logoGreen};
     border-bottom: 12px solid ${props => props.theme.logoBlue};
-    
   }
   @media screen and (max-width: 1023px) {
     flex-direction: column;

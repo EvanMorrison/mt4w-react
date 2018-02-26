@@ -6,10 +6,13 @@ import { rgba } from 'polished';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import NavEntries from './NavMenuData';
 
 const NavList = styled.ul`
-  list-style: none;
-  li {
+  * {
+    list-style: none;
+  }
+  >li {
     display: inline-block;
     color: ${props => props.position === 1 ? props.theme.contrastText : props.theme.primaryText};
     margin-right: 2px;
@@ -23,12 +26,10 @@ const NavList = styled.ul`
         transition: all .2s linear;
       }
     }
-    [class^='icon-'] { ${'' /* show menu icons only on mobile */}
+    ${'' /* show top-level menu icons only on mobile */}
+    [class^='icon-'] { 
       display: ${props => props.isMobile ? 'inline-block' : 'none'};
       color: ${props => props.theme.primaryText} !important;
-    }
-    &#about {
-      margin-top: ${props => props.isMobile && 180}px;
     }
   }
   @media (max-width: 1023px) {
@@ -36,7 +37,7 @@ const NavList = styled.ul`
     li {
       display: block;
       * {
-        font-size: 1.25em;
+        font-size: 1em;
         line-height: 2em;
       }
     }
@@ -48,16 +49,73 @@ const Icon = styled.span`
   font-size: 20px !important;
 `
 
+const NavItems = ({menuItems, ...props}) => {
+  return menuItems.map(m => (
+      <li key={m.label} 
+          onMouseEnter={(m.children ? props.openPopoverMenu : props.closePopoverMenu)}
+          onClick={props.handleClick}>
+        <NavLink to={m.path} exact={(m.path === '/' ? true : false)}>
+          <Icon className={`icon-${m.icon}`}/>
+            {m.label}
+        </NavLink>
+        {
+          (m.children ? 
+            props.isMobile ?
+            <ul style={{marginLeft:'24px'}}>
+              <NavItems {...props} menuItems={m.children} />
+            </ul> 
+            : <Submenu {...props} menuItem={m}/>  
+          : '')
+        }
+      </li>
+    ))
+}
+
+const Submenu = ({menuItem, ...props}) => {
+  return (
+    <Popover open={props.servicesOpen && props.anchorEl && props.anchorEl.children[0].textContent === menuItem.label}
+                 anchorEl={props.anchorEl}
+                 anchorOrigin={props.anchorOrigin}
+                 targetOrigin={props.targetOrigin}
+                 useLayerForClickAway={false}
+                 onRequestClose={props.closePopoverMenu}>
+          <Menu onMouseLeave={props.closePopoverMenu}
+                desktop={true}
+                onClick={props.handleClick}>
+            <NavLink to={menuItem.path}>
+              <MenuItem onClick={props.closePopoverMenu} 
+                        value={0}
+                        primaryText={menuItem.label}
+                        leftIcon={<Icon className={`icon-${menuItem.icon}`}/>}/>
+            </NavLink>
+            {menuItem['children'].map((m,i) => {
+              return (
+                <NavLink key={i} to={m.path}>
+                  <MenuItem 
+                    onClick={props.closePopoverMenu}
+                    value={i+1}
+                    primaryText={m.label}
+                    leftIcon={<i className={`icon-${m.icon}`} ></i>}
+                  />
+                </NavLink>
+              )
+            })}
+          </Menu>
+        </Popover>
+  )
+}
+
+
 class NavMenu extends React.Component {
   state = {
     servicesOpen: false,
     anchorEl: null
   }
-  openServicesMenu = event => {
+  openPopoverMenu = event => {
     event.preventDefault();
-    this.setState({ servicesOpen: true, anchorEl: this.refs.submenuAnchor});
+    this.setState({ servicesOpen: true, anchorEl: event.currentTarget});
   }
-  closeServicesMenu = event => {
+  closePopoverMenu = event => {
     if (this.props.isDrawerOpen) return;
     else this.setState({ servicesOpen:  false });
   }
@@ -69,80 +127,19 @@ class NavMenu extends React.Component {
       this.setState({servicesOpen: false});
     }
   }
+
+  
   render () {
     return (
       <nav className="navbar">
         <NavList position={this.props.position}
                   isMobile={this.props.isMobile}>
-          <li onMouseEnter={this.closeServicesMenu}
-              onClick={this.props.handleClick}>
-            <NavLink exact={true} to='/'>
-              <Icon className="icon-home" />
-                  Home
-            </NavLink>
-          </li>
-          <li ref="submenuAnchor"
-              onClick={this.openServicesMenu}>
-            <NavLink to='/services'
-                      onMouseEnter={this.openServicesMenu}>
-                      <Icon className="icon-accessibility" />
-                      Services
-            </NavLink>
-          </li>
-          <li onMouseEnter={this.closeServicesMenu}
-              onClick={this.props.handleClick}
-              id="about">
-            <NavLink to='/about'>
-                  <Icon className="icon-account_circle"/>
-                  About
-            </NavLink>
-          </li>
-          <li onMouseEnter={this.closeServicesMenu}
-              onClick={this.props.handleClick}>
-            <NavLink to='/appointments'>
-                  <Icon className="icon-schedule" />
-                  Appointments
-            </NavLink>
-          </li>
-          
+          <NavItems {...this.props} 
+                    {...this.state}
+                    menuItems={NavEntries}
+                    openPopoverMenu={this.openPopoverMenu}
+                    closePopoverMenu={this.closePopoverMenu}  />
         </NavList>
-        
-        <Popover open={this.state.servicesOpen}
-                 anchorEl={this.state.anchorEl}
-                 anchorOrigin={this.props.anchorOrigin}
-                 targetOrigin={this.props.targetOrigin}
-                 useLayerForClickAway={false}
-                 onRequestClose={ this.closeServicesMenu}>
-          <Menu onMouseLeave={this.closeServicesMenu}
-                desktop={true}
-                onClick={this.props.handleClick}>
-            <NavLink to="/services">
-              <MenuItem onClick={this.closeServicesMenu} 
-                        value={0}
-                        primaryText="Services"
-                        leftIcon={<Icon className="icon-accessibility"/>}/>
-            </NavLink>
-            <NavLink to="/services/massage">
-              <MenuItem onClick={this.closeServicesMenu} 
-                        value={1} 
-                        primaryText="Massage"
-                        leftIcon={<i className="icon-keyboard_arrow_right"></i>}/>
-            </NavLink>
-            <NavLink to="/services/lymphatic">
-              <MenuItem onClick={this.closeServicesMenu} 
-                        value={2} 
-                        primaryText="Lymphatic Drainage"
-                        leftIcon={<i className="icon-keyboard_arrow_right"></i>}/>
-            </NavLink>
-            <NavLink to="/services/myofascial">
-              <MenuItem onClick={this.closeServicesMenu} 
-                        value={3} 
-                        primaryText="Myofascial Release"
-                        leftIcon={<i className="icon-keyboard_arrow_right"></i>}/>
-            </NavLink>
-          </Menu>
-        </Popover>
-        
       </nav>
     )
   }
