@@ -1,7 +1,7 @@
 export default `<div class="place-card place-card-large">
   <div class="place-desc-large">
     <div class="place-name">Manual Therapy For Wellness</div>
-    <div class="address">9458 E Ironwood Square Dr #102, Scottsdale, AZ 85258</div>
+    <div class="address">9815 E Bell Road, Suite 110, Scottsdale, AZ 85260</div>
   </div>
   <div class="navigate">
     <div class="navigate">
