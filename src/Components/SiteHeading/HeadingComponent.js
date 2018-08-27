@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { Column } from '../../AppStyles';
+const logo = require('../../assets/logo_sm.png');
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
   margin: 0 auto;
 `
 const Brand = styled.div.attrs({
-  logo: require ('../../assets/logo_sm.png')
+  logo: logo
 })`
   
   position: fixed;
