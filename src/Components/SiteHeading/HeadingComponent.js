@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Column } from '../../AppStyles';
-const logo = require('../../assets/logo_sm.png');
+import * as logo from '../../assets/logo_sm.png';
 
 const StyledWrapper = styled.div`
   display: flex;
