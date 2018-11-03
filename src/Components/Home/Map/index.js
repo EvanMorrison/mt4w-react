@@ -79,8 +79,9 @@ class MapContainer extends React.Component {
 }
 
 MapContainer.defaultProps = {
-  zoom: 14,
-  address: '9458 East Ironwood Square Drive, #102, Scottsdale, AZ 85258',
+  zoom: 13,
+  // address: '9458 East Ironwood Square Drive, #102, Scottsdale, AZ 85258',
+  address: '9815 East Bell Road, Suite 110, Scottsdale, AZ 85260',
   center: null
 }
 MapContainer.propTypes = {
